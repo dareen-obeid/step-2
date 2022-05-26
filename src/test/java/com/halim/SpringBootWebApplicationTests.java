@@ -1,10 +1,10 @@
-package com.dareen.projectstep2;
+package com.halim;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class ProjectStep2ApplicationTests {
+class SpringBootWebApplicationTests {
 
 	@Test
 	void contextLoads() {

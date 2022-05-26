@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en" 
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>products</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="css/bootstrap.css"rel="stylesheet">
+
+</head>
+<body>
+
+	<div>
+	    <div class="col-12">
+	         <nav class="navbar navbar-expand-sm navbar-Light" style="background-color:#e3f2fd;">
+				<ul class="navbar-nav">
+  					<li class="nav-item">
+					<a class="nav-link font-weight-bold" href="/addProduct.html">Add Product</a>
+  					</li>
+ 					<li class="nav-item">
+					<a class="nav-link font-weight-bold" href="/listProducts.html"> List of Products</a>
+ 				    </li>
+				</ul>
+			</nav>
+			<hr>
+	         
+	         
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">image</th>
+      <th scope="col">product Code</th>
+      <th scope="col">product Name</th>
+      <th scope="col">product Description</th>
+      <th scope="col">productLine</th>
+      <th scope="col">quantityInStock</th>	  
+      <th scope="col">buyPrice</th>
+      <th scope="col">delete</th>
+      
+    </tr>
+  </thead>
+  <tbody>
+    <tr th:each="product : ${products}">
+    <th scope="row"><img alt="" th:src="*{'data:image/jpeg;base64,'+{product.image}}" style="width:100px; height:100px;"></th>
+      <th scope="row">[[*{product.productCode}]]</th>
+      <td>[[*{product.productName}]]
+      <!-- Button trigger modal -->
+<button type="button" class="btn btn-success btn-sm mt-2" data-toggle="modal" th:attr="data-target='#exampleModalCenter'+*{product.productCode}">
+  change name
+</button>
+
+<!-- Modal -->
+<div class="modal fade" th:id="*{'exampleModalCenter'+{product.productCode}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalCenterTitle">change product name</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+         <form action="/changeName"method="post">
+             <div class="form-group">
+                 <label>product code</label>
+                 <input type="hidden" th:value= "*{product.productCode}"
+                 class="form-control" name="productCode">
+                 <label>new Product name</label>
+                 <input type="text" name="newPname" class="form-control">
+                 <br>
+                 <button type="submit" class="btn btn-primary">submit</button>
+             </div>
+         </form>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+      
+      
+      </td>
+      <td>[[*{product.productDescription}]]
+      <!-- Button trigger modal -->
+<button type="button" class="btn btn-success btn-sm mt-2" data-toggle="modal" th:attr="data-target='#exampleModalCenter2'+*{product.productCode}">
+  change description
+</button>
+
+<!-- Modal -->
+<div class="modal fade" th:id="*{'exampleModalCenter2'+{product.productCode}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle2" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalCenterTitle2">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+         <form action="/changeDescription"method="post">
+             <div class="form-group">
+                 <label>product code</label>
+                 <input type="hidden" th:value= "*{product.productCode}"
+                 class="form-control" name="productCode">
+                 <label>new Product Description</label>
+                 <input type="text" name="newDescription" class="form-control">
+                 <br>
+                 <button type="submit" class="btn btn-primary">submit</button>
+             </div>
+         </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+      
+      
+      </td>
+      <td>[[*{product.productLine}]]
+      <!-- Button trigger modal -->
+<button type="button" class="btn btn-success btn-sm mt-2" data-toggle="modal" th:attr="data-target='#exampleModalCenter3'+*{product.productCode}">
+  change productLine
+</button>
+
+<!-- Modal -->
+<div class="modal fade" th:id="*{'exampleModalCenter3'+{product.productCode}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle3" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalCenterTitle3">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+         <form action="/changeproductLine"method="post">
+             <div class="form-group">
+                 <label>product code</label>
+                 <input type="hidden" th:value= "*{product.productCode}"
+                 class="form-control" name="productCode">
+                 <label>new Product Line</label>
+                 <input type="text" name="newproductLine" class="form-control">
+                 <br>
+                 <button type="submit" class="btn btn-primary">submit</button>
+             </div>
+         </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+      
+      
+      </td>
+      <td>[[*{product.quantityInStock}]]
+      <!-- Button trigger modal -->
+<button type="button" class="btn btn-success btn-sm mt-2" data-toggle="modal" th:attr="data-target='#exampleModalCenter4'+*{product.productCode}">
+  change quantityInStock
+</button>
+
+<!-- Modal -->
+<div class="modal fade" th:id="*{'exampleModalCenter4'+{product.productCode}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle4" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalCenterTitle4">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          <form action="/changequantityInStock"method="post">
+             <div class="form-group">
+                 <label>product code</label>
+                 <input type="hidden" th:value= "*{product.productCode}"
+                 class="form-control" name="productCode">
+                 <label>new Product quantityInStock</label>
+                 <input type="number" name="newquantityInStock" class="form-control">
+                 <br>
+                 <button type="submit" class="btn btn-primary">submit</button>
+             </div>
+         </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+      
+      
+      </td>
+      <td>[[*{product.buyPrice}]]
+      <!-- Button trigger modal -->
+<button type="button" class="btn btn-success btn-sm mt-2" data-toggle="modal" th:attr="data-target='#exampleModalCenter5'+*{product.productCode}">
+  change buyPrice
+</button>
+
+<!-- Modal -->
+<div class="modal fade" th:id="*{'exampleModalCenter5'+{product.productCode}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle5" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalCenterTitle5">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="/changebuyPrice"method="post">
+             <div class="form-group">
+                 <label>product code</label>
+                 <input type="hidden" th:value= "*{product.productCode}"
+                 class="form-control" name="productCode">
+                 <label>new Product buyPrice</label>
+                 <input type="number" name="newbuyPrice" class="form-control">
+                 <br>
+                 <button type="submit" class="btn btn-primary">submit</button>
+             </div>
+         </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+      
+      
+      </td>
+      <td><a th:href="@{/deleteProduct/{id}(id= ${product.productCode})}"
+      class= "btn btn-danger"> delete</a></td>
+      
+      
+    </tr>
+
+  </tbody>
+</table>
+	         
+	    </div>
+	</div>
+	
+	<script src="js/jquery-3.1.1.min.js"></script>
+	<script src="js/bootstrap.js"></script>
+
+</body>
+</html>
